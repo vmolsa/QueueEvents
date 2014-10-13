@@ -64,7 +64,7 @@ qe.emit('concat', 'hello', 'world', 1234, function(result) {
 
 ````
 var cluster = require('cluster');
-var QueueEvents = require('./lib/QueueEvents.js');
+var QueueEvents = require('QueueEvents');
 
 var events = new QueueEvents();
 
