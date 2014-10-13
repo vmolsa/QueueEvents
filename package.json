@@ -1,5 +1,5 @@
 {
-  "name": "QueueEvents",
+  "name": "queue-events",
   "description": "NodeJS Events through socket/process/pipe/events, JSONP",
   "version": "1.0.0",
   "main": "./index.js",
