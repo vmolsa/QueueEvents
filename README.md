@@ -36,3 +36,68 @@ events.emit('concat', 'hello', 'world', 1234, function(result) {
   socket.close();
 });
 ````
+
+````
+var events = require('events');
+var QueueEvents = require('QueueEvents');
+  
+var ev = new events.EventEmitter();
+var qe = new QueueEvents();
+  
+ev.on('data', function(data) {
+  qe.onData(data);
+});
+  
+qe.onWrite(function(out) {
+  ev.emit('data', out)
+}, 'object');
+  
+qe.on('concat', function(hello, world, num, callback) {
+  console.log(hello, world, num);
+  callback(hello + world + num);
+});
+  
+qe.emit('concat', 'hello', 'world', 1234, function(result) {
+  console.log('CONCAT:', result);
+});
+````
+
+````
+var cluster = require('cluster');
+var QueueEvents = require('./lib/QueueEvents.js');
+
+var events = new QueueEvents();
+
+if (cluster.isMaster) {
+  var worker = cluster.fork();
+    
+  worker.on('online', function() {
+    events.emit('concat', 'hello', 'world', 1234, function(result) {
+      console.log('CONCAT:', result);
+      worker.kill('SIGINT');
+    });
+  });
+
+  events.onWrite(function(out) {
+    worker.send(out);
+  }, 'object');
+
+  worker.on('message', function(msg) {
+    events.onData(msg);
+  });
+} else {
+  process.on('message', function(msg) {
+    events.onData(msg); 
+  });
+
+  events.onWrite(function(out) {
+    process.send(out);
+  }, 'object');
+  
+  events.on('concat', function(hello, world, num, callback) {
+    console.log(hello, world, num);
+
+    callback(hello + world + num);
+  });
+}
+````
