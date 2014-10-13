@@ -7,7 +7,7 @@ NodeJS Events through socket/process/pipe/events, JSONP
 
 ````
 var dgram = require('dgram');
-var QueueEvents = require('QueueEvents');
+var QueueEvents = require('queue-events');
 
 var events = new QueueEvents();
 var socket = dgram.createSocket("udp4");
@@ -39,7 +39,7 @@ events.emit('concat', 'hello', 'world', 1234, function(result) {
 
 ````
 var events = require('events');
-var QueueEvents = require('QueueEvents');
+var QueueEvents = require('queue-events');
   
 var ev = new events.EventEmitter();
 var qe = new QueueEvents();
@@ -64,7 +64,7 @@ qe.emit('concat', 'hello', 'world', 1234, function(result) {
 
 ````
 var cluster = require('cluster');
-var QueueEvents = require('QueueEvents');
+var QueueEvents = require('queue-events');
 
 var events = new QueueEvents();
 
