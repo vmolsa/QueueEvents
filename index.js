@@ -21,7 +21,7 @@
  * --------------------------------------------------------------------------------
  *
  *    var dgram = require('dgram');
- *    var QueueEvents = require('QueueEvents');
+ *    var QueueEvents = require('queue-events');
  *
  *    var events = new QueueEvents();
  *    var socket = dgram.createSocket("udp4");
@@ -54,7 +54,7 @@
  * --------------------------------------------------------------------------------
  *
  *    var events = require('events');
- *    var QueueEvents = require('QueueEvents');
+ *    var QueueEvents = require('queue-events');
  *    
  *    var ev = new events.EventEmitter();
  *    var qe = new QueueEvents();
@@ -80,7 +80,7 @@
  * --------------------------------------------------------------------------------
  *
  *    var cluster = require('cluster');
- *    var QueueEvents = require('QueueEvents');
+ *    var QueueEvents = require('queue-events');
  *    
  *    var events = new QueueEvents();
  *    
