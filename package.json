@@ -1,0 +1,14 @@
+{
+  "name": "QueueEvents",
+  "description": "NodeJS Events through socket/process/pipe/events, JSONP",
+  "version": "1.0.0",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vmolsa/QueueEvents"
+  },
+  "author": "vmolsa <ville.molsa@gmail.com> (http://github.com/vmolsa)",
+  "dependencies": {
+    "murmurhash-js": "^1.0.0"
+  }
+}
