@@ -426,4 +426,41 @@ QueueEvents.prototype.emit = function(event) {
   }
 };
 
+QueueEvents.prototype.static = function(event) {
+  var self = this;
+  
+  if (util.isString(event)) {
+    return argsSplit(arguments, 1, function(args, callback) {
+      var out = {};
+
+      if (callback) {
+        out._qeStatic = true;
+        out._qeReply = self.newEvent(callback);
+      }
+
+      out._qeName = event;
+      out._qeArgs = JSON.stringify(args);
+
+      switch (self._qeEncoding) {
+        case 'string':
+          out = JSON.stringify(out);
+          break;
+        case 'buffer':
+          out = new Buffer(JSON.stringify(out));
+          break;
+        default:
+          break;
+      }
+
+      if (self._qeOnWrite) {
+        self._qeOnWrite.call(self, out);
+      } else {
+        throw new Error('onWrite callback');
+      }
+      
+      return out._qeReply;
+    });
+  }
+};
+
 module.exports = QueueEvents;

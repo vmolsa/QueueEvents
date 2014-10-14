@@ -1,7 +1,7 @@
 {
   "name": "queue-events",
   "description": "NodeJS Events through socket/process/pipe/events, JSONP",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./index.js",
   "repository": {
     "type": "git",
